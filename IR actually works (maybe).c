@@ -10,8 +10,8 @@ motor[rD]=0;
 }
 void drive(int x){
 	if (x != 0) {
-		motor[rD]=10*x;
-		motor[lD]=50;
+		motor[rD]=10*x; // if robot faces right (x value >5) right motor speeds up
+		motor[lD]=50; // if robot faces left (x value >0 and <5) right motor slows down
 	}
 	else if(x==0){
 		PlaySound(soundBeepBeep);
