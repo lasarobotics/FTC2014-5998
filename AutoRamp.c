@@ -11,19 +11,19 @@ motor[rD]=0;
 void forward(int time){//lets you call it t o go forward for a certain amount of time
 motor[lD]=100;
 motor[rD]=100;
-waitMsec(time);
+wait1Msec(time);
 stop();
 }
 void turnR(int time){//turns right (on a dime-on forward, the other backward) for as long as it is called
 motor[lD]=50;
 motor[rD]=-50;
-waitMsec(time);
+wait1Msec(time);
 stop();
 }
 void turnL(int time){//turns left (on a dime^) for as long as it is called
 motor[lD]=-50;
 motor[rD]=50;
-waitMsec time;
+wait1Msec (time);
 stop();
 }
 /*
@@ -46,19 +46,24 @@ void drive(int x){//this is a test for ir, later used for driving
 */
 void drive(int x){
 	if (x != 0) {
-		int dif= 5-x
+		int dif= 5-x;
 		if (dif==0){
 			forward(6);
 		}
 		else if(dif>5){
-		turnL(6);
+	motor[lD]=80;
+	motor[rD]=80+dif*5;
+	wait1Msec(6);
+	stop();
 		}
+		//baseline of 80
 		else if(dif<5){
-		turnR(6);
+			motor[lD]=80+dif*5;
+			motor[rD]=80;
 		}
 	}//end of if !=0
 	else{ //this means it is 0 and you done messed up	(A-A-ron)
-	PlaySound(soundBeepBeep);
+	//PlaySound(soundBeepBeep);
 	//in order to re-find the signal, from Dr.Prof.Master Genius Bob's best idea, he concludes
 	//that the best course of action is for the robot
 	//to run around like a chicken with its head cut off i.e. turn around at a medium speed
