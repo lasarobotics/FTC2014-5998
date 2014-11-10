@@ -48,18 +48,18 @@ void drive(int x){
 	if (x != 0) {
 		int dif= 5-x;
 		if (dif==0){
-			forward(6);
+			turnR(6);//pray to god it works
 		}
-		else if(dif>5){
-	motor[lD]=80;
-	motor[rD]=80+dif*5;
+		else if(dif>0){
+	motor[lD]=80+dif*5;
+	motor[rD]=80-dif*5;
 	wait1Msec(6);
 	stop();
 		}
 		//baseline of 80
-		else if(dif<5){
-			motor[lD]=80+dif*5;
-			motor[rD]=80;
+		else if(dif<0){
+			motor[lD]=80-dif*5;
+			motor[rD]=80+dif*5;
 		}
 	}//end of if !=0
 	else{ //this means it is 0 and you done messed up	(A-A-ron)
