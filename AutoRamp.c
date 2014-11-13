@@ -67,7 +67,35 @@ void drive(int x){
 	//in order to re-find the signal, from Dr.Prof.Master Genius Bob's best idea, he concludes
 	//that the best course of action is for the robot
 	//to run around like a chicken with its head cut off i.e. turn around at a medium speed
+	//*************************************************
+	//************************************************
+//ethans email maybe
+	//:
+	/*
+	for(j = 0; sensor found; j++)
+{//goddmnit ethan for meesing up our syntax
+
+//this will make sure we turn at ascending differences, and in opposite
+direction Text me if you are confused.
+if(j = 0)
+{
+turnL(j)
+} else {
+turnR(j)
+}
+
+//this will change the direction we turn.
+i+=1;
+if(i = 2)
+i = 0;
+}
+	*/
+	//search inbox for 'ethan ftc else'
+	//*************************************************
+	//********************************************8***
 	turnL(6); //lets hope left is the best
+
+//^^^^^^^^^^^^^^^^^^^^^^^^ what i did try************************
 	}
 	wait1Msec(6);
 	stop();
@@ -76,7 +104,7 @@ void drive(int x){
 task main()
 {
 forward(2000);
-turnL(1000);
+turnL(500);
 while(true){
 nxtDisplayBigTextLine(0, "dir %d", SensorValue[irSense]); //praise 'SensorValue[irSense]' as truth
 drive(SensorValue[irSense]);
