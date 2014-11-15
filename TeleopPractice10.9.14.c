@@ -128,7 +128,7 @@ task main()
 {
   initializeRobot();
 
-  //waitForStart();   // wait for start of tele-op phase
+  waitForStart();   // wait for start of tele-op phase
 
   while (true)
   { //it constantly runs whatever is in here
@@ -190,13 +190,13 @@ task main()
 	//make sure that "0" is up and "90" is down.
 	if( joy1Btn(5) )
 	{
-		motor[lift1] = 100;
-		motor[lift2] = 100;
+		motor[lift1] = 50;
+		motor[lift2] = 50;
 	}
 	else if ( joy1Btn(7) )
 	{
-		motor[lift1] = -100;
-		motor[lift2] = -100;
+		motor[lift1] = -50;
+		motor[lift2] = -50;
 	}
 	else
 	{

@@ -113,7 +113,7 @@ i = 0;
 task main()
 {
 initializeRobot();
-//waitForStart();
+waitForStart();
 forward(4000);
 backward(200);
 turnL(500);

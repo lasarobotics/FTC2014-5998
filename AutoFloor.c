@@ -13,20 +13,20 @@ motor[rD]=0;
 //brakes both motors
 }
 void forward(int time){ //lets you call it t o go forward for a certain amount of time
-motor[lD]=100;
-motor[rD]=100;
+motor[lD]=20;
+motor[rD]=20;
 wait1Msec(time);
 stop();
 }
 void backward(int time){ //lets you call it to go forward for a certain amount of time
-motor[lD]=-75;
-motor[rD]=-75;
+motor[lD]=-15;
+motor[rD]=-15;
 wait1Msec(time);
 stop();
 }
 void turnR(int time){ //turns right (on a dime-on forward, the other backward) for as long as it is called
-motor[lD]=50;
-motor[rD]=-50;
+motor[lD]=10;
+motor[rD]=-10;
 wait1Msec(time);
 stop();
 }
@@ -44,7 +44,7 @@ void drive(int x){
 task main()
 {
 	initializeRobot();
-	//waitForStart();
+	waitForStart();
 while(true){
 	nxtDisplayBigTextLine(0, "dir %d", SensorValue[irSense]); //praise 'SensorValue[irSense]' as truth
 drive(SensorValue[irSense]);
