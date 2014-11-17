@@ -136,11 +136,11 @@ task main()
   { //it constantly runs whatever is in here
 
 	getJoystickSettings(joystick); //gets joystick input
-	 int modifier = 1;//set modifier variable
+	 int modifier = 5;//set modifier variable
 	if(joy1Btn(6))
 	{ //This creates a modifier variable. When the assistant driver presses the upper right trigger,
 		//the robot goes at a fifth of it's normal power
-		modifier = 5;
+		modifier = 1;
 	}
 	else if(joy1Btn(8))
 	{ //if button 8 is pressed, modifier is set to 10
@@ -148,7 +148,7 @@ task main()
 	}
 	else
 	{//if the buttons 6 and 8 aren't pressed, the robot goes back to driving at full power.
-		modifier =1;
+		modifier =5;
 	}
 	if( abs(joystick.joy1_y1) > 10){
 		motor[leftWheel] = (joystick.joy1_y1 / modifier); //reads joystick values on joystick one.

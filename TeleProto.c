@@ -136,11 +136,11 @@ task main()
   { //it constantly runs whatever is in here
 
 	getJoystickSettings(joystick); //gets joystick input
-	 int modifier = 1;//set modifier variable
+	 int modifier = 5;//set modifier variable
 	if(joy1Btn(6))
 	{ //This creates a modifier variable. When the assistant driver presses the upper right trigger,
 		//the robot goes at a fifth of it's normal power
-		modifier = 5;
+		modifier = 1;
 	}
 	else if(joy1Btn(8))
 	{ //if button 8 is pressed, modifier is set to 10
@@ -148,7 +148,7 @@ task main()
 	}
 	else
 	{//if the buttons 6 and 8 aren't pressed, the robot goes back to driving at full power.
-		modifier =1;
+		modifier =5;
 	}
 	if( abs(joystick.joy1_y1) > 10){
 		motor[leftWheel] = (joystick.joy1_y1 / modifier); //reads joystick values on joystick one.
@@ -205,6 +205,34 @@ task main()
 		motor[lift1] = 0;
 		motor[lift2] = 0;
 	}
-
+	//JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2 JOY 2
+	//for the operator
+	if(joy2Btn(1)){
+		servo[claw] = clawUp;
+		}
+	else if(joy2Btn(3)){
+		servo[claw]=clawDown;
+	}
+	if(joy2Btn(4)){
+		PlaySound(soundBeepBeep);
+		}
+	if (joy2Btn(2)){
+		PlaySound(soundBlip);
+	}
+	//6is expander up, 8 is down`
+/*	if()
+		while(true){
+motor[]= random[12];
 	}
 }
+*/
+
+//this is to raise the scissor lift
+	//motor[NAME]=100;
+	//wait1Msec(100);
+	//motor[NAME]=0;
+	}
+//}//is this the while loop?
+//teh last 2 are well you know, off limits
+	}
+//}
