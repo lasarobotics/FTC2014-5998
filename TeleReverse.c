@@ -6,8 +6,8 @@
 #pragma config(Sensor, S3,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     lift1,         tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     rightWheel,    tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S1_C2_1,     motorF,        tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_2,     motorG,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_1,     rightWheelFront, tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S3_C2_2,     leftWheelFront, tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     motorH,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     motorI,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S3_C1_1,     leftWheel,     tmotorTetrix, openLoop)
@@ -152,18 +152,22 @@ task main()
 	}
 	if( abs(joystick.joy1_y1) > 10){
 		motor[leftWheel] = (joystick.joy1_y1 / modifier); //reads joystick values on joystick one.
+		motor[leftWheelFront] = (joystick.joy1_y1 / modifier);
 	}
 	else
 	{
 		motor[leftWheel] = 0;
+		motor[leftWheelFront] = 0;
 	}
 	if( abs(joystick.joy1_y2) > 10)
 	{
 		motor[rightWheel] = (joystick.joy1_y2 / modifier); //the 'y'(up and down) axis values set the power.
+		motor[rightWheelFront] = (joystick.joy1_y2 / modifier);
 	}
 	else
 	{
 		motor[rightWheel] = 0;
+		motor[rightWheelFront] = 0;
 	}
 
 	//the below code will swing the claw to the down position.
