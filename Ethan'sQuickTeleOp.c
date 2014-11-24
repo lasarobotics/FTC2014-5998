@@ -27,6 +27,13 @@
 #define frontDown 200
 #define frontUp 0
 
+void flagSpin(int time)
+{
+motor[flag] = 50;
+wait1Msec(time);
+stopMotors();
+}
+
 task main()
 {
 	int modifier = 1;//set modifier variable
@@ -83,6 +90,11 @@ task main()
 	else if(joy2Btn(8))//change it back to joy2 after testing
 	{
 	servo[frontGrab]=frontDown;
+	}
+
+	if(joy2Btn(1))
+	{
+	flagSpin(1000);
 	}
 	//displays the octant the tophat is being pressed it
 	/*int pos= joy1_TopHat;
