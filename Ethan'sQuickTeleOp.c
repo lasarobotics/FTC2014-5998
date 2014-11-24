@@ -83,7 +83,7 @@ task main()
 	servo[backGrab] = backDown;
 	}
 
-		if(joy1Btn(6))//change it back to joy2 after testing
+		if(joy2Btn(6))//change it back to joy2 after testing
 	{
 	servo[frontGrab]=frontUp;
 	}

@@ -48,10 +48,10 @@ stopMotors();
 }
 void forwardSlow(int time)
 {
-motor[leftWheel1] = 30;
-motor[leftWheel2] = 30;
-motor[rightWheel1] = 30;
-motor[rightWheel2] = 30;
+motor[leftWheel1] = 15;
+motor[leftWheel2] = 15;
+motor[rightWheel1] = 15;
+motor[rightWheel2] = 15;
 wait1Msec(time);
 stopMotors();
 }
@@ -91,15 +91,17 @@ stopMotors();
 task main()
 {
 //goes off the ramp
+flagSpin(100);
 forward(2500);
-forwardSlow(600);
+forwardSlow(1300);
 //drops front servo
-wait1Msec(1000);
+wait1Msec(1100);
 servo[front] = frontDown;
-wait1Msec(3000);
+wait1Msec(900);
 backward(700);
-turnR(turnTime);
-forward(300);
+turnL(200);
+backward(4300);
+turnR(900);
 
 //after waiting, the servo goes back up
 servo[front] = frontUp;
