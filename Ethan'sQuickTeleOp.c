@@ -11,7 +11,7 @@
 #pragma config(Motor,  mtr_S3_C1_1,     leftWheel1,    tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S3_C1_2,     motorG,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S4_C1_1,     leftWheel2,    tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S4_C1_2,     motorI,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S4_C1_2,     flag,          tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S2_C1_1,    backGrab,             tServoStandard)
 #pragma config(Servo,  srvo_S2_C1_2,    frontGrab,            tServoStandard)
 #pragma config(Servo,  srvo_S2_C1_3,    servo3,               tServoNone)
@@ -31,7 +31,7 @@ void flagSpin(int time)
 {
 motor[flag] = 50;
 wait1Msec(time);
-stopMotors();
+motor[flag]=0;
 }
 
 task main()

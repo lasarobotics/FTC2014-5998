@@ -26,6 +26,7 @@
 #define frontUp 0
 #define inSpeed 50
 #define threshold 0
+#define turnTime 550 //usually, chk battery tho
 
 void stopMotors()
 {
@@ -45,6 +46,42 @@ motor[rightWheel2] = 100;
 wait1Msec(time);
 stopMotors();
 }
+void forwardSlow(int time)
+{
+motor[leftWheel1] = 30;
+motor[leftWheel2] = 30;
+motor[rightWheel1] = 30;
+motor[rightWheel2] = 30;
+wait1Msec(time);
+stopMotors();
+}
+void backward(int time)
+{
+motor[leftWheel1] = -50;
+motor[leftWheel2] = -50;
+motor[rightWheel1] = -50;
+motor[rightWheel2] = -50;
+wait1Msec(time);
+stopMotors();
+}
+void turnR(int time){ //turns right (on a dime-on forward, the other backward) for as long as it is called
+motor[leftWheel1]=50;
+motor[leftWheel2]=50;
+
+motor[rightWheel1]=-50;
+motor[rightWheel2]=-50;
+wait1Msec(time);
+stopMotors();
+}
+void turnL(int time){//turns left (on a dime^) for as long as it is called
+motor[leftWheel1]=-50;
+motor[leftWheel2]=-50;
+
+motor[rightWheel1]=50;
+motor[rightWheel2]=50;
+wait1Msec (time);
+stopMotors();
+}
 void flagSpin(int time)
 {
 motor[flag] = 50;
@@ -54,10 +91,16 @@ stopMotors();
 task main()
 {
 //goes off the ramp
-forward(2800);
+forward(2500);
+forwardSlow(600);
 //drops front servo
-servo[front] = frontDown;
 wait1Msec(1000);
+servo[front] = frontDown;
+wait1Msec(3000);
+backward(700);
+turnR(turnTime);
+forward(300);
+
 //after waiting, the servo goes back up
 servo[front] = frontUp;
 //flagspin
