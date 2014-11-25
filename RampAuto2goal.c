@@ -120,7 +120,7 @@ wait1Msec(200);
 //new part that gets the small goal::
 backwardSlow(1000);
 wait1Msec(500);
-turnL(1000);
+turnL(950);
 wait1Msec(500);
 backwardSlow(1500);
 wait1Msec(500);
