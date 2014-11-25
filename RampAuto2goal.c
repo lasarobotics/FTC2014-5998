@@ -124,7 +124,7 @@ turnL(1000);
 wait1Msec(500);
 backwardSlow(1500);
 wait1Msec(500);
-turnL(800);
+turnL(700);
 wait1Msec(500);
 backwardSlow(2000);
 wait1Msec(500);
@@ -134,10 +134,10 @@ forwardSlow(400);
 wait1Msec(500);
 
 //goes backward edit forward
-forward(700);
-turnR(300);
+forward(1000);
+turnL(400);
 forward(2500);
-turnL(300);
+turnR(400);
 forwardSlow(1500);
 turnL(800);
 
