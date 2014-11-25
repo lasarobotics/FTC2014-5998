@@ -117,16 +117,35 @@ backwardSlow(20);
 servo[front]=frontDown;
 wait1Msec(200);
 
-//goes backward
-backward(700);
-turnL(300);
-backward(2500);
-turnR(300);
+//new part that gets the small goal::
+backwardSlow(1000);
+wait1Msec(500);
+turnL(1000);
+wait1Msec(500);
 backwardSlow(1500);
-turnR(800);
+wait1Msec(500);
+turnL(800);
+wait1Msec(500);
+backwardSlow(2000);
+wait1Msec(500);
+servo[back]=backDown;
+wait1Msec(500);
+forwardSlow(400);
+wait1Msec(500);
+
+//goes backward edit forward
+forward(700);
+turnR(300);
+forward(2500);
+turnL(300);
+forwardSlow(1500);
+turnL(800);
+
 //after driving, the servo goes back up
 wait1Msec(200);
 servo[front] = frontUp;
-//flagspin
+servo[back]=backUp;
+
+//flagspin showboating
 flagSpin(1000);
 }
