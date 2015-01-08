@@ -51,7 +51,7 @@ task main()
 			modifier = 20;
 		}
 		else
-		{//if the buttons 6 and 8 aren't pressed, the robot goes back to driving at full power.
+		{ //if the buttons 6 and 8 aren't pressed, the robot goes back to driving at full power.
 			modifier = 1;
 		}
 		if( abs(joystick.joy1_y1) > 10){
@@ -74,20 +74,20 @@ task main()
 		motor[rightWheel2] = 0;
 	}
 
-	if(joy1Btn(5)||joy2Btn(5))//change it back to joy2 after testing
+	if(joy1Btn(5)||joy2Btn(5)) //change it back to joy2 after testing
 	{
 	servo[backGrab] = backUp;
 	}
-	else if(joy2Btn(7)||joy1Btn(7))//change it back to joy2 after testing
+	else if(joy2Btn(7)||joy1Btn(7)) //change it back to joy2 after testing
 	{
 	servo[backGrab] = backDown;
 	}
 
-		if(joy2Btn(6))//change it back to joy2 after testing
+		if(joy2Btn(6)) //change it back to joy2 after testing
 	{
 	servo[frontGrab]=frontUp;
 	}
-	else if(joy2Btn(8))//change it back to joy2 after testing
+	else if(joy2Btn(8)) //change it back to joy2 after testing
 	{
 	servo[frontGrab]=frontDown;
 	}

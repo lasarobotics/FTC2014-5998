@@ -11,17 +11,17 @@ int rightWheel2;
 |     Resets the read encoder values.
 |     This makes sure we don't mess up after turning or at the start of a match
 | stopMotors()
-|		 Makes it easier to monotir functions. Called Often
+|		 Makes it easier to monitor functions. Called Often
 | forward(rotations, power)
 |		 goes forward for a number of rotations.
 |		 automatically aligns after left wheel has travelled far enough
 | turnLeft(rotations, power)
 |		 turns left for the specified number of rotations.
 | turnRight(rotations, power)
-|		 tursn right for the specified number of rotations.
+|		 turns right for the specified number of rotations.
 \**********************************************************************************************/
 
-//Need to fix vairables. Free trial doesn't allow tool use.
+//Need to fix variables. Free trial doesn't allow tool use.
 void resetEncoders(){
 	nMotorEncoder[leftWheel1] = 0;
 	nMotorEncoder[leftWheel2] = 0;
