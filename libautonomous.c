@@ -20,7 +20,7 @@ int rightWheel2;
 | turnRight(rotations, power)
 |		 turns right for the specified number of rotations.
 \**********************************************************************************************/
-
+//ethan, did you make this?
 //Need to fix variables. Free trial doesn't allow tool use.
 void resetEncoders(){
 	nMotorEncoder[leftWheel1] = 0;
