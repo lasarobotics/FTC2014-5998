@@ -55,6 +55,15 @@ motor[rightWheel2] = 15;
 wait1Msec(time);
 stopMotors();
 }
+void forwardSpeed(int time, int speed)
+{
+motor[leftWheel1] = speed;
+motor[leftWheel2] = speed;
+motor[rightWheel1] = speed;
+motor[rightWheel2] = speed;
+wait1Msec(time);
+stopMotors();
+}
 void backward(int time)
 {
 motor[leftWheel1] = -50;
@@ -70,6 +79,15 @@ motor[leftWheel1] = -20;
 motor[leftWheel2] = -20;
 motor[rightWheel1] = -20;
 motor[rightWheel2] = -20;
+wait1Msec(time);
+stopMotors();
+}
+void backwardSpeed(int time, int speed)
+{
+motor[leftWheel1] = -1 * speed;
+motor[leftWheel2] = -1 * speed;
+motor[rightWheel1] = -1 * speed;
+motor[rightWheel2] = -1 * speed;
 wait1Msec(time);
 stopMotors();
 }
@@ -106,8 +124,8 @@ servo[back]=backUp;
 
 //goes off the ramp
 flagSpin(100);
-forward(2500);
-forwardSlow(1300);
+forwardSpeed(2500, 100);
+forwardSpeed(1300, 15);
 
 //drops front servo
 wait1Msec(200);
@@ -131,25 +149,25 @@ wait1Msec(500);
 servo[back]=backDown;
 wait1Msec(500);
 
-//NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW
+//NEW NEW
 //puts the preloaded in the small goal
 /*
-this is all seudo code
+this is all pseudocode code
 servo[dump]=dumpDown //declare this ^^
 flagspin(500);
 wait1Msec(500);
 */
 
 //going away from samll Cont.
-forwardSlow(400);
+forwardSpeed(400, 15);
 wait1Msec(500);
 
 //goes forward
-forward(1000);
+forwardSpeed(1000, 100);
 turnL(400);
-forward(2500);
+forwardSpeed(2500, 100);
 turnR(400);
-forwardSlow(1500);
+forwardSpeed(1500, 15);
 turnL(800);
 
 //after driving, the servo goes back up
