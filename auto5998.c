@@ -36,7 +36,6 @@
 | turnRight(rotations, power)
 |		 turns right for the specified number of rotations.
 \**********************************************************************************************/
-//Need to fix variables. Free trial doesn't allow tool use.
 #define backDown 225
 #define backUp 125
 #define frontDown 225
@@ -53,16 +52,16 @@ void armDown(){
 	servo[lift1] = liftOneDown;	
 	servo[lift2] = liftTwoDown;
 }
-void servoFrontUp(){
+void frontServoUp(){
 	servo[front] = frontUp;
 }
-void servoFrontDown(){
+void frontServoDown(){
 	servo[front] = frontDown;
 }
-void servoBackUp(){
+void backServoUp(){
 	servo[back] = backUp;	
 }
-void servoBackDown(){
+void backServoDown(){
 	servo[back] = backDown;
 }
 void resetEncoders(){
@@ -111,23 +110,6 @@ void forward( int rotations, int power ){
 }//forward function
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void backwards(int rotations, int power){
 	nMotorEncoder[leftWheel1] = rotations;
 	nMotorEncoder[rightWheel1] = rotations;
@@ -164,8 +146,8 @@ void turnRight(int rotations, int power){
 task main()
 {
 	armUp();
-	servoFrontUp(); 
-	// DEBUG servoBackUp();
+	frontServoUp(); 
+	// DEBUG backServoUp();
 	//Servos
 	armUp();
 	forward(7500, 100);
@@ -173,16 +155,16 @@ task main()
 	//Drives Down The Ramp
 
 	armUp();	
-	servoFrontDown();
+	frontServoDown();
 	turnLeft(3750, 60);
 	wait1Msec(500);
 	//turns to face the other tube
 	
 	armUp();
-	servoBackUp();
+	backServoUp();
 	wait1Msec(500);
 	backwards(4000, 80); //backwards is line 120
-	servoBackDown();
+	backServoDown();
 	//backs into the second tube and grabs it
 	
 	
