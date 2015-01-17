@@ -23,18 +23,18 @@
 /**********************************************************************************************\
 | Functions:
 |
-| resetEncoders()
-|     Resets the read encoder values.
-|     This makes sure we don't mess up after turning or at the start of a match
-| stopMotors()
-|		 Makes it easier to monitor functions. Called Often
-| forward(rotations, power)
-|		 goes forward for a number of rotations.
-|		 automatically aligns after left wheel has travelled far enough
-| turnLeft(rotations, power)
-|		 turns left for the specified number of rotations.
-| turnRight(rotations, power)
-|		 turns right for the specified number of rotations.
+|resetEncoders()
+|	resets the encoder values
+|	makes sure we don't mess up after turning or at the start of a match
+|stopMotors()
+|	makes it easier to monitor functions
+|forward(rotations, power)
+|	goes forward for a number of rotations
+|	automatically corrects for motor output discrepancies
+|turnLeft(rotations, power)
+|	turns left for the specified number of rotations
+|turnRight(rotations, power)
+|	turns right for the specified number of rotations
 \**********************************************************************************************/
 #define backDown 225
 #define backUp 125
@@ -44,130 +44,135 @@
 #define liftTwoUp 0
 #define liftOneDown 0
 #define liftTwoDown 250
-void armUp(){
+
+void armUp() {
 	servo[lift1] = liftOneUp;	
 	servo[lift2] = liftTwoUp;
 }
-void armDown(){
+
+void armDown() {
 	servo[lift1] = liftOneDown;	
 	servo[lift2] = liftTwoDown;
 }
-void frontServoUp(){
+
+void frontServoUp() {
 	servo[front] = frontUp;
 }
-void frontServoDown(){
+
+void frontServoDown() {
 	servo[front] = frontDown;
 }
-void backServoUp(){
+
+void backServoUp() {
 	servo[back] = backUp;	
 }
-void backServoDown(){
+
+void backServoDown() {
 	servo[back] = backDown;
 }
-void resetEncoders(){
+
+void resetEncoders() {
 	nMotorEncoder[leftWheel1] = 0;
 	nMotorEncoder[leftWheel2] = 0;
 	nMotorEncoder[rightWheel1] = 0;
 	nMotorEncoder[rightWheel2] = 0;
-}//resets motor encoders
-void stopMotors(){
+} // resets motor encoders
+
+void stopMotors() {
 	wait1Msec(100);
 	motor[rightWheel1] = 0;
 	motor[rightWheel2] = 0;
 	motor[leftWheel1] = 0;
 	motor[leftWheel2] = 0;
 	resetEncoders();
-}//stops drive
+} // stops drive
 
-void forward( int rotations, int power ){
-	resetEncoders(); //Resets the motor encoder readings.
-	while( (nMotorEncoder[leftWheel1] < rotations) && (nMotorEncoder[rightWheel1] < rotations) && (nMotorEncoder[leftWheel2]) < rotations && (nMotorEncoder[rightWheel2] < rotations)){
+void forward(int rotations, int power) {
+	resetEncoders(); // resets the motor encoder readings
+	while (((nMotorEncoder[leftWheel1] < rotations) && (nMotorEncoder[rightWheel1] < rotations)) && ((nMotorEncoder[leftWheel2] < rotations) && (nMotorEncoder[rightWheel2] < rotations))){
 		motor[leftWheel1] = power;
 		motor[rightWheel1] = power;
 		motor[leftWheel2] = power;
 		motor[rightWheel2] = power;
-	}//goes forward until one of the two sides has rotated enough
+	} // goes forward until one of the wheels has rotated enough
 	stopMotors();
 
-	if( ( nMotorEncoder[leftWheel1] + nMotorEncoder[leftWheel2] ) - ( nMotorEncoder[rightWheel1] + nMotorEncoder[rightWheel2] ) > 100){
-		//if shifted to face left
-		while( nMotorEncoder[leftWheel1] - nMotorEncoder[rightWheel1] > 0 ){
-			motor[rightWheel1] = power / 5;//turns to be straight
+	if (((nMotorEncoder[leftWheel1] + nMotorEncoder[leftWheel2]) - (nMotorEncoder[rightWheel1] + nMotorEncoder[rightWheel2])) > 100) {
+		 // if shifted to face left
+		while(nMotorEncoder[leftWheel1] - nMotorEncoder[rightWheel1] > 0) {
+			motor[rightWheel1] = power/5;
 		}
 			stopMotors();
 			resetEncoders();
 			return;
 	}
-	if( ( nMotorEncoder[rightWheel1] + nMotorEncoder[rightWheel2] ) - ( nMotorEncoder[leftWheel1] + nMotorEncoder[leftWheel2] ) > 100 ){
-		//if shifted to face right
-		while( nMotorEncoder[rightWheel1] - nMotorEncoder[leftWheel1] > 0 ){
-			motor[leftWheel1] = power/5;//turns to be straight
+	
+	if (((nMotorEncoder[rightWheel1] + nMotorEncoder[rightWheel2]) - (nMotorEncoder[leftWheel1] + nMotorEncoder[leftWheel2])) > 100) {
+		// if shifted to face right
+		while(nMotorEncoder[rightWheel1] - nMotorEncoder[leftWheel1] > 0) {
+			motor[leftWheel1] = power/5;
 		}
 	}
 
 	stopMotors();
 	resetEncoders();
-}//forward function
+}
 
-
-void backwards(int rotations, int power){
+void backwards (int rotations, int power) {
 	nMotorEncoder[leftWheel1] = rotations;
 	nMotorEncoder[rightWheel1] = rotations;
 	nMotorEncoder[leftWheel2] = rotations;
 	nMotorEncoder[rightWheel2] = rotations;	
-	while( (nMotorEncoder[leftWheel1] > 0) && (nMotorEncoder[rightWheel1] > 0) && (nMotorEncoder[leftWheel2] > 0) && (nMotorEncoder[rightWheel2] > 0)){
-			motor[leftWheel1] = -power;
-			motor[rightWheel1] = -power;
-			motor[leftWheel2] = -power;
-			motor[rightWheel2] = -power;
-	}//goes backward until one of the two sides has rotated enough
+	while ((nMotorEncoder[leftWheel1] > 0) && (nMotorEncoder[rightWheel1] > 0) && (nMotorEncoder[leftWheel2] > 0) && (nMotorEncoder[rightWheel2] > 0)) {
+			motor[leftWheel1] = -1 * power;
+			motor[rightWheel1] = -1 * power;
+			motor[leftWheel2] = -1 * power;
+			motor[rightWheel2] = -1 * power;
+	} // go backward until one of the two sides has rotated enough
 }
 
-void turnLeft(int rotations, int power){
-	resetEncoders();//resets encoders
-	while(nMotorEncoder[rightWheel2] < rotations){
+void turnLeft (int rotations, int power) {
+	resetEncoders(); // resets encoders
+	while (nMotorEncoder[rightWheel2] < rotations){ 
 		motor[rightWheel2] = power;
 		motor[leftWheel2] = -power;
  	}
  	stopMotors();
  	return;
-}//turns left
+}
 
-void turnRight(int rotations, int power){
-	resetEncoders();//resets encoders
-	while(nMotorEncoder[leftWheel2] < rotations){
+void turnRight (int rotations, int power) {
+	resetEncoders(); // resets encoders
+	while (nMotorEncoder[leftWheel2] < rotations) {
 		motor[leftWheel2] = power;
 		motor[rightWheel2] = -power;
  	}
  	stopMotors();
  	return;
-}//turns right
-//Start of Auto
+}
+
 task main()
 {
 	armUp();
 	frontServoUp(); 
-	// DEBUG backServoUp();
-	//Servos
+	// backServoUp();
+	// Servos
 	armUp();
 	forward(7500, 100);
 	stopMotors();
-	//Drives Down The Ramp
+	// drives down the ramp
 
 	armUp();	
 	frontServoDown();
 	turnLeft(3750, 60);
 	wait1Msec(500);
-	//turns to face the other tube
+	// turns to face the other tube
 	
 	armUp();
 	backServoUp();
 	wait1Msec(500);
-	backwards(4000, 80); //backwards is line 120
+	backwards(4000, 80); // backwards is line 120
 	backServoDown();
-	//backs into the second tube and grabs it
-	
-	
-	
-		wait1Msec(500);
+	// backs into the second tube and grabs it
+	wait1Msec(500);
 }
