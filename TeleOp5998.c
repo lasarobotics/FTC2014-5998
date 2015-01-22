@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 #pragma config(Hubs,  S1, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S2, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S3, HTServo,  none,     none,     none)

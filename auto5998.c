@@ -36,7 +36,10 @@
 | turnRight(rotations, power)
 |		 turns right for the specified number of rotations.
 \**********************************************************************************************/
+<<<<<<< HEAD
 //Need to fix variables. Free trial doesn't allow tool use.
+=======
+>>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 #define backDown 225
 #define backUp 125
 #define frontDown 225
@@ -46,6 +49,7 @@
 #define liftOneDown 0
 #define liftTwoDown 250
 void armUp(){
+<<<<<<< HEAD
 	servo[lift1] = liftOneUp;
 	servo[lift2] = liftTwoUp;
 }
@@ -63,6 +67,25 @@ void servoBackUp(){
 	servo[back] = backUp;
 }
 void servoBackDown(){
+=======
+	servo[lift1] = liftOneUp;	
+	servo[lift2] = liftTwoUp;
+}
+void armDown(){
+	servo[lift1] = liftOneDown;	
+	servo[lift2] = liftTwoDown;
+}
+void frontServoUp(){
+	servo[front] = frontUp;
+}
+void frontServoDown(){
+	servo[front] = frontDown;
+}
+void backServoUp(){
+	servo[back] = backUp;	
+}
+void backServoDown(){
+>>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 	servo[back] = backDown;
 }
 void resetEncoders(){
@@ -111,6 +134,7 @@ void forward( int rotations, int power ){
 }//forward function
 
 
+<<<<<<< HEAD
 
 
 
@@ -128,11 +152,17 @@ void forward( int rotations, int power ){
 
 
 
+=======
+>>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 void backwards(int rotations, int power){
 	nMotorEncoder[leftWheel1] = rotations;
 	nMotorEncoder[rightWheel1] = rotations;
 	nMotorEncoder[leftWheel2] = rotations;
+<<<<<<< HEAD
 	nMotorEncoder[rightWheel2] = rotations;
+=======
+	nMotorEncoder[rightWheel2] = rotations;	
+>>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 	while( (nMotorEncoder[leftWheel1] > 0) && (nMotorEncoder[rightWheel1] > 0) && (nMotorEncoder[leftWheel2] > 0) && (nMotorEncoder[rightWheel2] > 0)){
 			motor[leftWheel1] = -power;
 			motor[rightWheel1] = -power;
@@ -164,14 +194,20 @@ void turnRight(int rotations, int power){
 task main()
 {
 	armUp();
+<<<<<<< HEAD
 	servoFrontUp();
 	// DEBUG servoBackUp();
+=======
+	frontServoUp(); 
+	// DEBUG backServoUp();
+>>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 	//Servos
 	armUp();
 	forward(7500, 100);
 	stopMotors();
 	//Drives Down The Ramp
 
+<<<<<<< HEAD
 	armUp();
 	servoFrontDown();
 	turnLeft(3750, 60);
@@ -187,5 +223,22 @@ task main()
 
 
 
+=======
+	armUp();	
+	frontServoDown();
+	turnLeft(3750, 60);
+	wait1Msec(500);
+	//turns to face the other tube
+	
+	armUp();
+	backServoUp();
+	wait1Msec(500);
+	backwards(4000, 80); //backwards is line 120
+	backServoDown();
+	//backs into the second tube and grabs it
+	
+	
+	
+>>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 		wait1Msec(500);
 }
