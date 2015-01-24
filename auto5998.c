@@ -36,10 +36,6 @@
 | turnRight(rotations, power)
 |		 turns right for the specified number of rotations.
 \**********************************************************************************************/
-<<<<<<< HEAD
-//Need to fix variables. Free trial doesn't allow tool use.
-=======
->>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 #define backDown 225
 #define backUp 125
 #define frontDown 225
@@ -48,31 +44,20 @@
 #define liftTwoUp 0
 #define liftOneDown 0
 #define liftTwoDown 250
+void showStatus(int rotations, int power){
+		nxtDisplayTextLine(1, "Power: %d", power);
+		nxtDisplayTextLine(2, "rotations: %d",rotations);
+		nxtDisplayTextLine(3, "encoders: %d",nMotorEncoder[leftWheel1]);
+		nxtDisplayTextLine(4, "encoders: %d",nMotorEncoder[leftWheel2]);
+		nxtDisplayTextLine(5, "encoders: %d",nMotorEncoder[rightWheel1]);
+		nxtDisplayTextLine(6, "encoders: %d",nMotorEncoder[rightWheel2]);
+}
 void armUp(){
-<<<<<<< HEAD
 	servo[lift1] = liftOneUp;
 	servo[lift2] = liftTwoUp;
 }
 void armDown(){
 	servo[lift1] = liftOneDown;
-	servo[lift2] = liftTwoDown;
-}
-void servoFrontUp(){
-	servo[front] = frontUp;
-}
-void servoFrontDown(){
-	servo[front] = frontDown;
-}
-void servoBackUp(){
-	servo[back] = backUp;
-}
-void servoBackDown(){
-=======
-	servo[lift1] = liftOneUp;	
-	servo[lift2] = liftTwoUp;
-}
-void armDown(){
-	servo[lift1] = liftOneDown;	
 	servo[lift2] = liftTwoDown;
 }
 void frontServoUp(){
@@ -82,10 +67,9 @@ void frontServoDown(){
 	servo[front] = frontDown;
 }
 void backServoUp(){
-	servo[back] = backUp;	
+	servo[back] = backUp;
 }
 void backServoDown(){
->>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 	servo[back] = backDown;
 }
 void resetEncoders(){
@@ -106,6 +90,7 @@ void stopMotors(){
 void forward( int rotations, int power ){
 	resetEncoders(); //Resets the motor encoder readings.
 	while( (nMotorEncoder[leftWheel1] < rotations) && (nMotorEncoder[rightWheel1] < rotations) && (nMotorEncoder[leftWheel2]) < rotations && (nMotorEncoder[rightWheel2] < rotations)){
+		showStatus(rotations, power);
 		motor[leftWheel1] = power;
 		motor[rightWheel1] = power;
 		motor[leftWheel2] = power;
@@ -134,48 +119,45 @@ void forward( int rotations, int power ){
 }//forward function
 
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 void backwards(int rotations, int power){
-	nMotorEncoder[leftWheel1] = rotations;
-	nMotorEncoder[rightWheel1] = rotations;
-	nMotorEncoder[leftWheel2] = rotations;
-<<<<<<< HEAD
-	nMotorEncoder[rightWheel2] = rotations;
-=======
-	nMotorEncoder[rightWheel2] = rotations;	
->>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
-	while( (nMotorEncoder[leftWheel1] > 0) && (nMotorEncoder[rightWheel1] > 0) && (nMotorEncoder[leftWheel2] > 0) && (nMotorEncoder[rightWheel2] > 0)){
-			motor[leftWheel1] = -power;
-			motor[rightWheel1] = -power;
-			motor[leftWheel2] = -power;
-			motor[rightWheel2] = -power;
-	}//goes backward until one of the two sides has rotated enough
+	resetEncoders(); //Resets the motor encoder readings.
+	while( (abs(nMotorEncoder[leftWheel1]) < rotations) || (abs(nMotorEncoder[rightWheel1]) < rotations) || (abs(nMotorEncoder[leftWheel2]) < rotations) || (abs(nMotorEncoder[rightWheel2]) < rotations)){
+		showStatus(rotations, power);
+		motor[leftWheel1] = -power;
+		motor[rightWheel1] = -power;
+		motor[leftWheel2] = -power;
+		motor[rightWheel2] = -power;
+	}//goes forward until one of the two sides has rotated enough
+	stopMotors();
+
+	if( abs(( nMotorEncoder[leftWheel1] + nMotorEncoder[leftWheel2] ) - ( nMotorEncoder[rightWheel1] + nMotorEncoder[rightWheel2] )) > 100){
+		//if shifted to face left
+		while( nMotorEncoder[leftWheel1] - nMotorEncoder[rightWheel1] > 0 ){
+			motor[rightWheel1] = -power / 5;//turns to be straight
+		}
+			stopMotors();
+			resetEncoders();
+
+	}
+	if( abs(( nMotorEncoder[rightWheel1] + nMotorEncoder[rightWheel2] ) - ( nMotorEncoder[leftWheel1] + nMotorEncoder[leftWheel2] )) > 100 ){
+		//if shifted to face right
+		while( nMotorEncoder[rightWheel1] - nMotorEncoder[leftWheel1] > 0 ){
+			motor[leftWheel1] = -power/5;//turns to be straight
+		}
+	}
+
+	stopMotors();
+	resetEncoders();
 }
 
 void turnLeft(int rotations, int power){
 	resetEncoders();//resets encoders
-	while(nMotorEncoder[rightWheel2] < rotations){
+	while( (nMotorEncoder[rightWheel2] < rotations) && abs(nMotorEncoder[leftWheel2]) < rotations ){
+		showStatus(rotations, power);
 		motor[rightWheel2] = power;
-		motor[leftWheel2] = -power;
+		motor[rightWheel1] = power;
+		motor[leftWheel2] = 0;
+		motor[leftWheel1] = 0;
  	}
  	stopMotors();
  	return;
@@ -184,6 +166,7 @@ void turnLeft(int rotations, int power){
 void turnRight(int rotations, int power){
 	resetEncoders();//resets encoders
 	while(nMotorEncoder[leftWheel2] < rotations){
+		showStatus(rotations, power);
 		motor[leftWheel2] = power;
 		motor[rightWheel2] = -power;
  	}
@@ -194,51 +177,31 @@ void turnRight(int rotations, int power){
 task main()
 {
 	armUp();
-<<<<<<< HEAD
-	servoFrontUp();
-	// DEBUG servoBackUp();
-=======
-	frontServoUp(); 
-	// DEBUG backServoUp();
->>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
+	frontServoUp();
+	backServoUp();
 	//Servos
 	armUp();
-	forward(7500, 100);
+	forward(6950, 100);
 	stopMotors();
+	forward(500, 20);
 	//Drives Down The Ramp
 
-<<<<<<< HEAD
 	armUp();
-	servoFrontDown();
-	turnLeft(3750, 60);
-	wait1Msec(500);
-	//turns to face the other tube
-
-	armUp();
-	servoBackUp();
-	wait1Msec(500);
-	backwards(4000, 80); //backwards is line 120
-	servoBackDown();
-	//backs into the second tube and grabs it
-
-
-
-=======
-	armUp();	
 	frontServoDown();
-	turnLeft(3750, 60);
+	wait1Msec(500);
+	turnLeft(4700, 30);
 	wait1Msec(500);
 	//turns to face the other tube
-	
+
 	armUp();
 	backServoUp();
 	wait1Msec(500);
-	backwards(4000, 80); //backwards is line 120
+
+	backwards(2000, 30); //backwards for half the distance as we want
+	stopMotors();
 	backServoDown();
+	armDown();
 	//backs into the second tube and grabs it
-	
-	
-	
->>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
-		wait1Msec(500);
+	wait1Msec(500);
+	PlaySound(soundBeepBeep);
 }
