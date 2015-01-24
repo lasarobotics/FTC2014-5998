@@ -165,14 +165,15 @@ void turnLeft(int rotations, int power){
 
 void turnRight(int rotations, int power){
 	resetEncoders();//resets encoders
-	while(nMotorEncoder[leftWheel2] < rotations){
+	while( (nMotorEncoder[leftWheel2] < rotations) && abs(nMotorEncoder[rightWheel2]) < rotations ){
 		showStatus(rotations, power);
+		motor[rightWheel2] = 0;
+		motor[rightWheel1] = 0;
 		motor[leftWheel2] = power;
-		motor[rightWheel2] = -power;
+		motor[leftWheel1] = power;
  	}
  	stopMotors();
- 	return;
-}//turns right
+ 	return;}//turns right
 //Start of Auto
 task main()
 {
@@ -201,7 +202,21 @@ task main()
 	stopMotors();
 	backServoDown();
 	armDown();
+	PlaySound(soundBeepBeep);
+	//scores balls
+	frontServoDown();
+	backServoDown();
+	wait1Msec(500);
+	turnRight(300, 30);
 	//backs into the second tube and grabs it
+	wait1Msec(500);
+	PlaySound(soundBeepBeep);
+	forward(7500, 80);
+	backServoDown();
+	frontServoDown();
+	stopMotors();
+	turnRight(600, 30);
+	stopMotors();
 	wait1Msec(500);
 	PlaySound(soundBeepBeep);
 }
