@@ -177,7 +177,6 @@ void turnRight(int rotations, int power){
 //Start of Auto
 task main()
 {
-	armUp();
 	frontServoUp();
 	backServoUp();
 	//Servos
@@ -198,7 +197,7 @@ task main()
 	backServoUp();
 	wait1Msec(500);
 
-	backwards(2000, 30); //backwards for half the distance as we want
+	backwards(2600, 30); //backwards for half the distance as we want
 	stopMotors();
 	backServoDown();
 	armDown();
@@ -219,4 +218,7 @@ task main()
 	stopMotors();
 	wait1Msec(500);
 	PlaySound(soundBeepBeep);
+	forward(1812, 50);
+	wait1Msec(500);
+	stopMotors();
 }
