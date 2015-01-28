@@ -197,7 +197,7 @@ task main()
 	forward(6950, 50);
 	stopMotors();
 	forward(650, 20);
-	//Drives Down The Ramp
+	// drives down the ramp
 
 	armUp();
 	frontServoDown();

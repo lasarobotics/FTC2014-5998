@@ -59,7 +59,7 @@ task main() {
 
 		if (joy1Btn(6)) {
 			servo[front]=frontUp;
-		} else if(joy1Btn(8))	{
+		} else if (joy1Btn(8)) {
 			servo[front]=frontDown;
 		}
 	}
