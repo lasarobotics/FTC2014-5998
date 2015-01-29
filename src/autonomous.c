@@ -106,7 +106,6 @@ void forward( int rotations, int power ){
 		}
 			stopMotors();
 			resetEncoders();
-			return;
 	}
 	if( ( nMotorEncoder[rightWheel1] + nMotorEncoder[rightWheel2] ) - ( nMotorEncoder[leftWheel1] + nMotorEncoder[leftWheel2] ) > 100 ){
 		//if shifted to face right
@@ -161,7 +160,6 @@ void turnLeft(int rotations, int power){
 		motor[leftWheel1] = 0;
  	}
  	stopMotors();
- 	return;
 }//turns left
 
 void turnRight(int rotations, int power){
@@ -174,23 +172,18 @@ void turnRight(int rotations, int power){
 		motor[leftWheel1] = power;
  	}
  	stopMotors();
- 	return;
  }//turns right
 void initializeRobot()
 {
  	armUp();
  	frontServoUp();
 	backServoUp();
-
-	return;
 }
 
 //Start of Auto
 task main()
 {
 	waitForStart(); //waits for Starts
-
-
 	initializeRobot();
 	//Servos
 	armUp();
@@ -198,18 +191,15 @@ task main()
 	stopMotors();
 	forward(650, 20);
 	// drives down the ramp
-
 	armUp();
 	frontServoDown();
 	wait1Msec(500);
 	turnLeft(4700, 20);
 	wait1Msec(500);
 	//turns to face the other tube
-
 	armUp();
 	backServoUp();
 	wait1Msec(500);
-
 	backwards(2375, 15); //backwards for half the distance as we want
 	stopMotors();
 	backServoDown();
@@ -232,5 +222,5 @@ task main()
 	wait1Msec(500);
 	stopMotors();
 	PlaySound(soundBeepBeep);
-	forward(5000, 20); //makes sure we dont fall short.
+	forward(5000, 7.5); //forward(5000, 20); //makes sure we dont fall short.
 }

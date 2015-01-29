@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> fd8e22183c03d4026bd428f4b1a444071dca3695
 #pragma config(Hubs,  S1, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S2, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S3, HTServo,  none,     none,     none)
@@ -38,10 +34,7 @@ task main()
 	//initializeRobot();
 	while(true)
 	{
-		servo[lift1]=
-		servo[lift2]=
-
-		getJoystickSettings(joystick); //gets joystick input
+		servo[lift1]=	servo[lift2]=getJoystickSettings(joystick); //gets joystick input
 		modifier = 1;
 		if( abs(joystick.joy1_y1) > 10){
 		motor[leftWheel1] = (-joystick.joy1_y1 / modifier); //reads joystick values on joystick one.
