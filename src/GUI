@@ -1,0 +1,57 @@
+int startWait = 1;
+bool kickstand = true;
+int kickTime = 15;
+bool check = false;
+int spot = 4;
+while(check == false){
+	nxtDisplayCenteredTextLine(1, "-----LASA5998----");
+	nxtDisplayCenteredTextLine(2, "-Pick Autonomous-");
+	nxtDisplayTextLine(3, "_________________");
+	nxtDisplayTextLine(4, "> StartWait: %d  <", startWait);
+	nxtDisplayTextLine(5, "> Kickstand: %d  <", kickstand);
+	nxtDisplayTextLine(6, "> Kick Time:  %d <", kickTime);
+	nxtDisplayTextLine(7, "_________________");
+	nxtDisplayTextLine(8, "_________________");
+	if( nxtButtonPressed() /* Right Button  */){
+		if(spot == 4 && startWait < 10){ 
+			startWait++; 
+		}
+		if(spot == 5){
+			kickstand = !kickstand;
+		}
+		if(spot == 6 && kickTime < 28){
+			kickTime++;
+		}
+	}
+	if( nxtButtonPressed() /* Left Button  */){
+		if(spot == 4 && startWait > 1){ 
+			startWait--; 
+		}
+		if(spot == 5){
+			kickstand = !kickstand;
+		}
+		if(spot == 6 && kickTime > 15){
+			kickTime--;
+		}
+	}
+	if( nxtButtonPressed() && spot != 6 /* Middle Button  */){
+		spot++;
+	}
+	if( nxtButtonPressed() && spot == 6/* Middle Button */){
+		check = true;
+	}
+	wait1MSec(20);
+}
+while(check == true){
+	nxtDisplayTextLine(1, "-----LASA5998----");
+	nxtDisplayTextLine(2, "-Pick Autonomous-");
+	nxtDisplayTextLine(3, "_________________");
+	nxtDisplayTextLine(4, "> StartWait: %d  <", startWait);
+	nxtDisplayTextLine(5, "> Kickstand: %d  <", kickstand);
+	nxtDisplayTextLine(6, "> Kick Time:  %d <", kickTime);
+	nxtDisplayCenteredTextLine(7, " -- Press Orange --");
+	nxtDisplayCenteredTextLine(8, " -- to Confirm -- ");	
+	while(nxtButtonPressed() != true /*Center Button*/ ){
+		wait1MSec(20);
+	}
+}
