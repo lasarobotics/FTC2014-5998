@@ -181,10 +181,28 @@ void initializeRobot()
 }
 
 //Start of Auto
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 task main()
 {
+
+
 	//waitForStart(); //waits for Starts
-  int zone;
+	ClearTimer(T1);
+	int zone;
   wait1Msec(500);
 	nxtDisplayCenteredTextLine(3, "IR Value: %d", SensorValue[ir]);
  	wait10Msec(50);
@@ -227,6 +245,21 @@ task main()
 		turnRight(1400, 20);
 		forward(2700, 20);
 		turnRight(1450, 20);
+		PlaySound(soundBeepBeep);
+		wait1Msec(1000);
+	}
+
+	if (kickstand){
+		backwards(500, 20);
+		turnLeft(350, 20);
+		forward(1750, 20);
+		turnRight(350, 20);
+
+		while( time1[T1] < kickTime ){
+			wait1Msec(1);
+		}
+
+		forward(800, 20);
 		PlaySound(soundBeepBeep);
 		wait1Msec(1000);
 	}

@@ -20,7 +20,7 @@
 #pragma config(Servo,  srvo_S3_C1_6,    servo6,               tServoNone)
 #include "JoystickDriver.c"
 
-#define rpcm 11.25//the number of rotations that it takes to move the lift 1 meter
+#define rpcm 11.25 //the number of rotations that it takes to move the lift 1 meter
 
 int currentHeight;
 void resetEncoders(){
@@ -49,5 +49,5 @@ void liftHandler (int heightTarget)//param is the desired height in cm
 	}
 }
 task main(){
-	liftHandler(60);
+	liftHandler(60); // change to desired value after lift is built
 }
