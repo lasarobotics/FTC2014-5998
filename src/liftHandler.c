@@ -10,7 +10,7 @@
 #pragma config(Motor,  mtr_S1_C1_2,     rightWheel2,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S2_C1_1,     leftWheel1,    tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S2_C1_2,     leftWheel2,    tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S4_C1_1,     h,             tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S4_C1_1,     lift,             tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S4_C1_2,     kjg,           tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S3_C1_1,    front,                tServoStandard)
 #pragma config(Servo,  srvo_S3_C1_2,    back,                 tServoStandard)
@@ -18,18 +18,36 @@
 #pragma config(Servo,  srvo_S3_C1_4,    lift2,                tServoStandard)
 #pragma config(Servo,  srvo_S3_C1_5,    servo5,               tServoNone)
 #pragma config(Servo,  srvo_S3_C1_6,    servo6,               tServoNone)
+#include "JoystickDriver.c"
 
-#define liftOneUp 250
-#define liftTwoUp 0
+#define rpcm 11.25 //the number of rotations that it takes to move the lift 1 meter
 
-void armUp(){
-	servo[lift1] = liftOneUp;
-	servo[lift2] = liftTwoUp;
-}
+int currentHeight;
+void resetEncoders(){
+	nMotorEncoder[lift] = 0;
+}//resets motor encoders
 
-task main()
+void liftHandler (int heightTarget)//param is the desired height in cm
 {
-	PlaySound(soundBeepBeep); // test changes
-	armUp();
-	wait1Msec(1000);
+	int heightDif=0;
+	if(currentHeight>heightTarget){
+	heightDif=currentHeight-heightTarget;
+	}
+	if(currentHeight<heightTarget){
+	heightDif= -(currentHeight-heightTarget);
+	}
+	bool runRest = true;
+	if(currentHeight==heightTarget){
+	//this means it is tryinng to go to where it already thinks it is, this is bad
+	runRest  = false;
+	}
+	if (runRest) {
+		int rotations=heightDif/rpcm;
+		motor[lift]=100;
+		nMotorEncoder[lift]=rotations;
+		motor[lift]=0;
+	}
+}
+task main(){
+	liftHandler(60); // change to desired value after lift is built
 }
