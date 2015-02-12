@@ -1,11 +1,16 @@
 #pragma config(Hubs,  S1, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S2, HTMotor,  none,     none,     none)
-#pragma config(Hubs,  S3, HTServo,  none,     none,     none)
+#pragma config(Hubs,  S3, HTServo,  HTMotor,  none,     none)
+#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S2,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S3,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S4,     ir,             sensorHiTechnicIRSeeker1200)
 #pragma config(Motor,  mtr_S1_C1_1,     rightWheel1,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     rightWheel2,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S2_C1_1,     leftWheel1,    tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S2_C1_2,     leftWheel2,    tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S3_C2_1,     Infeed,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S3_C2_2,     Pulley,        tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Servo,  srvo_S3_C1_1,    front,                tServoStandard)
 #pragma config(Servo,  srvo_S3_C1_2,    back,                 tServoStandard)
 #pragma config(Servo,  srvo_S3_C1_3,    lift1,                tServoStandard)
@@ -74,6 +79,7 @@ void resetEncoders(){
 	nMotorEncoder[leftWheel2] = 0;
 	nMotorEncoder[rightWheel1] = 0;
 	nMotorEncoder[rightWheel2] = 0;
+	nMotorEncoder[Pulley] = 0;
 }//resets motor encoders
 void stopMotors(){
 	wait1Msec(100);
@@ -206,7 +212,7 @@ task main()
   wait1Msec(500);
 	nxtDisplayCenteredTextLine(3, "IR Value: %d", SensorValue[ir]);
  	wait10Msec(50);
- 	if(SensorValue[ir] == 3){
+ 	if(SensorValue[ir] == 3 || SensorValue[ir] == 0){
  		zone = 1;
 	}
 	else if(SensorValue[ir] == 4){
@@ -223,44 +229,46 @@ task main()
 	if( zone == 3){
 		forward(500, 20);
 		turnRight(350, 20);
-		forward(1750, 20);
+		forward(2600, 20);
 		turnLeft(350, 20);
-		forward(800, 20);
+		turnRight(350, 20);
+		forward(20, 20);
 		PlaySound(soundBeepBeep);
-		wait1Msec(1000);
+		wait1Msec(10000);
 	}
 	if( zone == 2){
 		forward(250, 20);
 		turnLeft(800, 20);
-		forward(1400, 20);
-		turnRight(1650, 20);
+		forward(1050, 20);
+		turnRight(1820, 20);
 		forward(1700, 20);
+		turnRight(100, 20);
+		turnLeft(100, 20);
 		PlaySound(soundBeepBeep);
 		wait1Msec(1000);
 	}
 	if( zone == 1 ){
-	forward(250, 20);
+		forward(250, 20);
 		turnLeft(1200, 20);
-		forward(800, 20);
+		forward(900, 20);
 		turnRight(1400, 20);
-		forward(2700, 20);
-		turnRight(1450, 20);
+		forward(3000, 20);
+		turnRight(2500, 20);
+		turnLeft(360, 20);
 		PlaySound(soundBeepBeep);
 		wait1Msec(1000);
 	}
-
-	if (kickstand){
+	/*
 		backwards(500, 20);
-		turnLeft(350, 20);
-		forward(1750, 20);
-		turnRight(350, 20);
-
-		while( time1[T1] < kickTime ){
-			wait1Msec(1);
+		turnRight(550, 20);
+		if (zone != 1){
+			forward(1500, 20);
+		} else {
+			forward(750, 20);
 		}
-
+		turnLeft(50, 20);
 		forward(800, 20);
 		PlaySound(soundBeepBeep);
 		wait1Msec(1000);
-	}
+	*/
 }
