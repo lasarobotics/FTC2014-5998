@@ -140,7 +140,6 @@ void backwards(int rotations, int power){
 		}
 			stopMotors();
 			resetEncoders();
-
 	}
 	if( abs(( nMotorEncoder[rightWheel1] + nMotorEncoder[rightWheel2] ) - ( nMotorEncoder[leftWheel1] + nMotorEncoder[leftWheel2] )) > 100 ){
 		//if shifted to face right
@@ -148,11 +147,9 @@ void backwards(int rotations, int power){
 			motor[leftWheel1] = -power/5;//turns to be straight
 		}
 	}
-
 	stopMotors();
 	resetEncoders();
 }
-
 void turnLeft(int rotations, int power){
 	resetEncoders();//resets encoders
 	while( (nMotorEncoder[rightWheel2] < rotations) && abs(nMotorEncoder[leftWheel2]) < rotations ){
@@ -204,9 +201,11 @@ void initializeRobot()
 
 task main()
 {
-
-
-	//waitForStart(); //waits for Starts
+	//waitForStart(); //waits for Start Command From FCS
+		while(nMotorEncoder[Pulley] < 28200){
+			motor[Pulley] = 90;
+		}
+		motor[Pulley] = 0;
 	ClearTimer(T1);
 	int zone;
   wait1Msec(500);
@@ -231,7 +230,6 @@ task main()
 		turnRight(350, 20);
 		forward(2600, 20);
 		turnLeft(350, 20);
-		turnRight(350, 20);
 		forward(20, 20);
 		PlaySound(soundBeepBeep);
 		wait1Msec(10000);
@@ -242,8 +240,6 @@ task main()
 		forward(1050, 20);
 		turnRight(1820, 20);
 		forward(1700, 20);
-		turnRight(100, 20);
-		turnLeft(100, 20);
 		PlaySound(soundBeepBeep);
 		wait1Msec(1000);
 	}
@@ -253,8 +249,6 @@ task main()
 		forward(900, 20);
 		turnRight(1400, 20);
 		forward(3000, 20);
-		turnRight(2500, 20);
-		turnLeft(360, 20);
 		PlaySound(soundBeepBeep);
 		wait1Msec(1000);
 	}

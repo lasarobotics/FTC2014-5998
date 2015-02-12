@@ -15,11 +15,6 @@ task main()
 {
 	int power = 0;
 	nMotorEncoder[Pulley] = 0;
-
-	while(nMotorEncoder[Pulley] < 28200 ){//keeps it not over-extending
-		motor[Pulley] = 50;//moves the pulley upward
-	}
-
 	while(true){
 		eraseDisplay();
 		nxtDisplayCenteredTextLine(3, "Power: %d",power);//shows power and encoder value (rotations)
