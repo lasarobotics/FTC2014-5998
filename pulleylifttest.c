@@ -16,13 +16,16 @@ task main()
 	int power = 0;
 	nMotorEncoder[Pulley] = 0;
 
-	while(nMotorEncoder[Pulley] < 28200 ){ motor[Pulley] = 50; }
+	while(nMotorEncoder[Pulley] < 28200 ){//keeps it not over-extending
+		motor[Pulley] = 50;//moves the pulley upward
+	}
 
 	while(true){
 		eraseDisplay();
-		nxtDisplayCenteredTextLine(3, "Power: %d",power);
+		nxtDisplayCenteredTextLine(3, "Power: %d",power);//shows power and encoder value (rotations)
 		nxtDisplayCenteredTextLine(4, "Encoder: %d", nMotorEncoder[Pulley]);
 		wait1Msec(200);
+		//allows the user to move the lift based on button pushes
 		if(nNxtButtonPressed == 1){ power += 5; }
 		if(nNxtButtonPressed == 2){ power -= 5; }
 		if(nNxtButtonPressed == 3){ power = 50; }
