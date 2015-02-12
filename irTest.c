@@ -12,10 +12,10 @@
 
 task main()
 {
-	int zone;
+	int zone;//this is what of the 3 configurations the center goal is in based on ir results
 	while (true)
   {
-		eraseDisplay();
+		eraseDisplay();//sum that fancy gui stuffz yum yum
 
   	nxtDisplayCenteredTextLine(3, "IR Value: %d", SensorValue[ir]);
   	wait10Msec(50);
