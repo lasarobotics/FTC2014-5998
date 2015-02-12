@@ -1,7 +1,7 @@
 #pragma config(Hubs,  S3, HTServo,  HTMotor,  none,     none)
 #pragma config(Sensor, S3,     ,               sensorI2CMuxController)
-#pragma config(Motor,  mtr_S3_C2_1,     JesusPull,   tmotorTetrix, openLoop, reversed, encoder)
-#pragma config(Motor,  mtr_S3_C2_2,  		JesusPulley,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S3_C2_1,     Pull,   tmotorTetrix, openLoop, reversed, encoder)
+#pragma config(Motor,  mtr_S3_C2_2,  	  Pulley,        tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S3_C1_1,    servo1,               tServoNone)
 #pragma config(Servo,  srvo_S3_C1_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S3_C1_3,    servo3,               tServoNone)
@@ -14,19 +14,19 @@
 task main()
 {
 	int power = 0;
-	nMotorEncoder[JesusPulley] = 0;
+	nMotorEncoder[Pulley] = 0;
 
-	while(nMotorEncoder[JesusPulley] < 28200 ){ motor[JesusPulley] = 50; }
+	while(nMotorEncoder[Pulley] < 28200 ){ motor[Pulley] = 50; }
 
 	while(true){
 		eraseDisplay();
 		nxtDisplayCenteredTextLine(3, "Power: %d",power);
-		nxtDisplayCenteredTextLine(4, "Encoder: %d", nMotorEncoder[JesusPulley]);
+		nxtDisplayCenteredTextLine(4, "Encoder: %d", nMotorEncoder[Pulley]);
 		wait1Msec(200);
 		if(nNxtButtonPressed == 1){ power += 5; }
 		if(nNxtButtonPressed == 2){ power -= 5; }
 		if(nNxtButtonPressed == 3){ power = 50; }
-		motor[JesusPulley] = power;
+		motor[Pulley] = power;
 	}
 
 

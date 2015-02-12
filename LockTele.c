@@ -21,6 +21,7 @@
 
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
+//global constant var's
 #define backDown 225
 #define backUp 125
 #define frontDown 225
@@ -28,10 +29,10 @@
 
 task main()
 {
-	waitForStart();
+	waitForStart();//makes it tourney legal
 	int modifier = 3;
-	bool frontServo = true;
-	bool backServo = true;
+	bool frontServo = true;//decides whether the servo should run
+	bool backServo = true;//''^
 	while(true)
 	{
 		if(frontServo){
@@ -62,7 +63,7 @@ task main()
 		if (joy1Btn(5)) {
 			backServo = true;
 		}	else if(joy1Btn(7)) {
-			backServo = false;	
+			backServo = false;
 		}
 		if (joy1Btn(6)) {
 			frontServo = true;
