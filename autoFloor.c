@@ -342,11 +342,10 @@ task main()
 			motor[Pulley] = 100;
 		}
 		motor[Pulley] = 0;
-		forward(500, 20);
-		turnLeft(360, 20);
+		turnRight(720, 20);
+		forward(125, 20);
+		servo[drop] = 25;
 	}
-
-	servo[drop] = 65;
 	PlaySound(soundBeepBeep);
 	wait1Msec(750);
 }
