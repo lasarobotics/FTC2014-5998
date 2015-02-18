@@ -31,7 +31,6 @@ task main()
 	while(true)
 	{
 		getJoystickSettings(joystick); //gets joystick input
-		modifier = 1;
 		if( abs(joystick.joy1_y1) > 10){
 			motor[leftWheel1] = (-joystick.joy1_y1 / modifier); //reads joystick values on joystick one.
 			motor[leftWheel2] = (-joystick.joy1_y1 / modifier);
@@ -54,19 +53,19 @@ task main()
 
 		if(joy1Btn(5))//change it back to joy2 after testing
 		{
-		servo[back] = backUp;
+			servo[back] = backUp;
 		}
 		else if(joy1Btn(7))//change it back to joy2 after testing
 		{
-		servo[back] = backDown;
+			servo[back] = backDown;
 		}
 
 		if(joy1Btn(4))
 		{
 			modifier = 7;
-		} else if(joy1Btn(1)){
-		 	modifier = 2;
-		} else {
+			} else if(joy1Btn(1)){
+			modifier = 2;
+			} else {
 			modifier = 4;
 		}
 
@@ -78,18 +77,18 @@ task main()
 		else if(joy2Btn(7))
 		{
 			motor[Pulley] = -75;
-		}	else {
+			}	else {
 			motor[Pulley] = 0;
 		}
 		//Buttons 5 and 7 manipulate the lift
 
 		if(joy2Btn(6))
 		{
-			motor[intake] = 25;
+			motor[intake] = 75;
 		}
 		else if(joy2Btn(8))
 		{
-			motor[intake] = -25;
+			motor[intake] = -75;
 		}
 		else
 		{
@@ -99,11 +98,11 @@ task main()
 
 		if( joy2Btn(4) )//open
 		{
-			servo[drop] = 65;
+			servo[drop] = 55;
 		}
 		else if(joy2Btn(3))
 		{//close
-			servo[drop] = 140;
+			servo[drop] = 120;
 		}
 	}
 }

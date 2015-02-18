@@ -38,11 +38,11 @@
 #define backDown 225
 #define backUp 125
 void showStatus(int rotations, int power){
-		nxtDisplayTextLine(1, "Power: %d", power);
-		nxtDisplayTextLine(2, "rotations: %d",rotations);
-		nxtDisplayTextLine(3, "encoders: %d",nMotorEncoder[leftWheel1]);
-		nxtDisplayTextLine(4, "encoders: %d",nMotorEncoder[leftWheel2]);
-		nxtDisplayTextLine(5, "encoders: %d",nMotorEncoder[rightWheel2]);
+	nxtDisplayTextLine(1, "Power: %d", power);
+	nxtDisplayTextLine(2, "rotations: %d",rotations);
+	nxtDisplayTextLine(3, "encoders: %d",nMotorEncoder[leftWheel1]);
+	nxtDisplayTextLine(4, "encoders: %d",nMotorEncoder[leftWheel2]);
+	nxtDisplayTextLine(5, "encoders: %d",nMotorEncoder[rightWheel2]);
 }
 void backServoUp(){//this moves the down servo to the upright position
 	servo[back] = backUp;
@@ -99,9 +99,9 @@ void turnLeft(int rotations, int power){
 		motor[rightWheel1] = power;
 		motor[leftWheel2] = 0;
 		motor[leftWheel1] = 0;
- 	}
- 	stopMotors();
- 	return;
+	}
+	stopMotors();
+	return;
 }//turns left
 
 void turnRight(int rotations, int power){
@@ -112,10 +112,10 @@ void turnRight(int rotations, int power){
 		motor[rightWheel1] = 0;
 		motor[leftWheel2] = power;
 		motor[leftWheel1] = power;
- 	}
- 	stopMotors();
- 	return;
- }//turns right
+	}
+	stopMotors();
+	return;
+}//turns right
 void initializeRobot()
 {
 	backServoUp();
@@ -128,25 +128,30 @@ void intakeDown(){
 	motor[Infeed] = 0;
 }
 void liftUp(){
-		/*
+	/*
 
-		while(nMotorEncoder[Pulley] < 25000){
-			motor[Pulley] = 100;
-		}
-		motor[Pulley] = 0;
-		while(nMotorEncoder[Pulley] < 29000){
-			motor[Pulley] = 20;
-		}
-		motor[Pulley] = 0;
-		while(nMotorEncoder[Pulley] < 30000){
-			motor[Pulley] = 15;
-		}
-		motor[Pulley] = 0;
+	while(nMotorEncoder[Pulley] < 25000){
+	motor[Pulley] = 100;
+	}
+	motor[Pulley] = 0;
+	while(nMotorEncoder[Pulley] < 29000){
+	motor[Pulley] = 20;
+	}
+	motor[Pulley] = 0;
+	while(nMotorEncoder[Pulley] < 30000){
+	motor[Pulley] = 15;
+	}
+	motor[Pulley] = 0;
 
-		*/
-		motor[Pulley] = 100;
+	*/
+	motor[Pulley] = 100;
+	if (externalBatteryAvg >= 11.7) {
+		wait1Msec(9.5 * 1000);
+	} else {
 		wait1Msec(9.7 * 1000);
-		motor[Pulley] = 0;
+	}
+	motor[Pulley] = 0;
+
 }
 //Start of Auto
 
@@ -167,7 +172,7 @@ void liftUp(){
 task main()
 {
 
-	//waitForStart(); //waits for Start Command From FCS
+	waitForStart(); //waits for Start Command From FCS
 	ClearTimer(T1);
 	eraseDisplay();
 	nxtDisplayBigTextLine(3, "Go!");
@@ -176,12 +181,12 @@ task main()
 
 	wait1Msec(500);
 	nxtDisplayCenteredTextLine(3, "IR Value: %d", SensorValue[ir]);
- 	wait1Msec(50);
+	wait1Msec(50);
 
 
 
- 	if(SensorValue[ir] == 3 || SensorValue[ir] == 0){
- 		zone = 1;
+	if(SensorValue[ir] == 3 || SensorValue[ir] == 0){
+		zone = 1;
 	}
 	else if(SensorValue[ir] == 4){
 		zone = 2;
@@ -235,7 +240,7 @@ task main()
 		backwards(500, 20);
 		liftUp();
 		turnRight(600, 20);
-		forward(125, 20);
+		forward(200, 20);
 	}
 	servo[drop] = 25;
 	PlaySound(soundBeepBeep);

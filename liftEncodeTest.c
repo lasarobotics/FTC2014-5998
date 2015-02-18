@@ -25,7 +25,7 @@ task main()
 
 		if( nMotorEncoder[Pulley] < pos){
 			motor[Pulley] = 50;
-		} else {
+			} else {
 			motor[Pulley] = 0;
 		}
 	}
