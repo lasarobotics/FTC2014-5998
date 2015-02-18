@@ -98,11 +98,11 @@ task main()
 
 		if( joy2Btn(4) )//open
 		{
-			servo[drop] = 55;
+			servo[drop] = 10;
 		}
 		else if(joy2Btn(3))
 		{//close
-			servo[drop] = 120;
+			servo[drop] = 100;
 		}
 	}
 }

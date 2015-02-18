@@ -12,7 +12,7 @@
 
 task main()
 {
-	int pos = 140;
+	int pos = 10;
 	while(true){
 		eraseDisplay();
 		nxtDisplayCenteredTextLine(3, "Pos: %d",pos);//shows power and encoder value (rotations)
@@ -21,7 +21,7 @@ task main()
 		if(nNxtButtonPressed == 1){ pos += 5; }
 		if(nNxtButtonPressed == 2){ pos -= 5; }
 		if(nNxtButtonPressed == 3){ pos = 125; }
-		servo[back2] = pos;
+		servo[drop] = pos;
 		servo[servo2] = pos;
 	}
 }
