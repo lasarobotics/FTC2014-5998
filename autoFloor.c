@@ -119,7 +119,7 @@ void turnRight(int rotations, int power){
 void initializeRobot()
 {
 	backServoUp();
-	servo[drop] = 140;
+	servo[drop] = 120;
 	return;
 }
 void intakeDown(){
@@ -127,7 +127,27 @@ void intakeDown(){
 	forward(200, 20);
 	motor[Infeed] = 0;
 }
+void liftUp(){
+		/*
 
+		while(nMotorEncoder[Pulley] < 25000){
+			motor[Pulley] = 100;
+		}
+		motor[Pulley] = 0;
+		while(nMotorEncoder[Pulley] < 29000){
+			motor[Pulley] = 20;
+		}
+		motor[Pulley] = 0;
+		while(nMotorEncoder[Pulley] < 30000){
+			motor[Pulley] = 15;
+		}
+		motor[Pulley] = 0;
+
+		*/
+		motor[Pulley] = 100;
+		wait1Msec(9.7 * 1000);
+		motor[Pulley] = 0;
+}
 //Start of Auto
 
 
@@ -146,130 +166,6 @@ void intakeDown(){
 
 task main()
 {
-	int startWait = 1;
-	int selection = 4;
-	int kickTime = 15;
-	bool kickstand = true;
-	bool cont = false;
-
-
-	bDisplayDiagnostics = false;
-	while(selection != 7){
-		eraseDisplay();
-		nxtDisplayCenteredTextLine(0, "+--------------+");
-		nxtDisplayCenteredTextLine(1, "|  LASA 5998   |");
-		nxtDisplayCenteredTextLine(2, "|PickAutonomous|");
-		nxtDisplayCenteredTextLine(3, "+--------------+");
-		if(selection == 4){
-			nxtDisplayCenteredTextLine(4, "->StartWait: %d  ", startWait);
-		} else {
-			nxtDisplayCenteredTextLine(4, "StartWait: %d  ", startWait);
-		}
-		if(selection == 5){
-			if(kickstand == true){
-				nxtDisplayCenteredTextLine(5, "->Kickstand: Yes");
-			}else{
-				nxtDisplayCenteredTextLine(5, "->Kickstand: No");
-			}
-		} else {
-			if(kickstand == true){
-				nxtDisplayCenteredTextLine(5, "Kickstand: Yes");
-			}else{
-				nxtDisplayCenteredTextLine(5, "Kickstand: No");
-			}
-		}
-		if(selection == 6){
-			nxtDisplayCenteredTextLine(6, "->KickTime:%d ", kickTime);
-		} else {
-			nxtDisplayCenteredTextLine(6, "Kick Time:%d ", kickTime);
-		}
-		nxtDisplayCenteredTextLine(7, "-----------------------", selection);
-
-		cont = false;
-		while(cont == false){
-			wait1Msec(200);
-			if (nNxtButtonPressed == 2){
-				if( (selection == 4) && (startWait > 1) ){
-					startWait--;
-					cont = true;
-				}
-				if(selection == 5){
-					kickstand = !kickstand;
-					cont = true;
-				}
-				if( (selection == 6) && (kickTime > 15)){
-					kickTime--;
-					cont = true;
-				}
-			}
-			if(nNxtButtonPressed == 1){
-				if( (selection == 4) && (startWait < 10) ){
-					cont = true;
-					startWait++;
-				}
-				if(selection == 5){
-					kickstand = !kickstand;
-					cont = true;
-				}
-				if( (selection == 6) && (kickTime < 27)){
-					kickTime++;
-					cont = true;
-				}
-			}
-			if(nNxtButtonPressed == 3){
-				selection++;
-				cont = true;
-			}
-		}
-	}
-	eraseDisplay();
-	nxtDisplayBigTextLine(3, "Press Enter");
-	while(nNxtButtonPressed != 3){
-		wait1Msec(1);
-	}
-	eraseDisplay();
-	nxtDisplayBigTextLine(3, "Ready");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	//waitForStart(); //waits for Start Command From FCS
 	ClearTimer(T1);
@@ -281,6 +177,9 @@ task main()
 	wait1Msec(500);
 	nxtDisplayCenteredTextLine(3, "IR Value: %d", SensorValue[ir]);
  	wait1Msec(50);
+
+
+
  	if(SensorValue[ir] == 3 || SensorValue[ir] == 0){
  		zone = 1;
 	}
@@ -302,16 +201,14 @@ task main()
 
 	if( (zone == 3) || (zone == 0) ){
 		turnRight(350, 20);
-		forward(3000, 20);
+		forward(2500, 20);
 		turnLeft(350, 20);
 		PlaySound(soundBeepBeep);
 		wait1Msec(1000);
 		backwards(500, 20);
-		while(nMotorEncoder[Pulley] < 29000){
-			motor[Pulley] = 100;
-		}
-		motor[Pulley] = 0;
-		forward(500, 20);
+		liftUp();
+		turnRight(40, 20);
+		forward(650, 20);
 	}
 	if( zone == 2){
 		forward(250, 20);
@@ -322,10 +219,8 @@ task main()
 		PlaySound(soundBeepBeep);
 		wait1Msec(1000);
 		backwards(500, 20);
-		while(nMotorEncoder[Pulley] < 29000){
-			motor[Pulley] = 100;
-		}
-		motor[Pulley] = 0;
+		liftUp();
+		turnRight(40, 20);
 		forward(500, 20);
 	}
 	if( zone == 1 ){
@@ -338,14 +233,12 @@ task main()
 		PlaySound(soundBeepBeep);
 		wait1Msec(1000);
 		backwards(500, 20);
-		while(nMotorEncoder[Pulley] < 29000){
-			motor[Pulley] = 100;
-		}
-		motor[Pulley] = 0;
-		turnRight(720, 20);
+		liftUp();
+		turnRight(600, 20);
 		forward(125, 20);
-		servo[drop] = 25;
 	}
+	servo[drop] = 25;
 	PlaySound(soundBeepBeep);
 	wait1Msec(750);
+	backwards(200, 20);
 }
