@@ -29,6 +29,7 @@ task main()
 	waitForStart();
 	int modifier = 4;//set modifier variable
 	//initializeRobot();
+
 	while(true)
 	{
 		getJoystickSettings(joystick); //gets joystick input
@@ -68,7 +69,7 @@ task main()
 		else if(joy1Btn(8))
 		{
 			servo[back2] = 180;
-		}\
+		}
 
 		if(joy1Btn(4))
 		{
@@ -94,11 +95,11 @@ task main()
 
 		if(joy2Btn(6))
 		{
-			motor[intake] = 75;
+			motor[intake] = 100;
 		}
 		else if(joy2Btn(8))
 		{
-			motor[intake] = -75;
+			motor[intake] = -100;
 		}
 		else
 		{
