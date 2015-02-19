@@ -48,12 +48,13 @@ void showStatus(int rotations, int power){
 		nxtDisplayTextLine(5, "encoders: %d",nMotorEncoder[rightWheel2]);
 }
 void backServoUp(){//this moves the down servo to the upright position
-	servo[back] = backUp;
-	servo[back2] = backDown;
+	servo[back2] = 60;
+	servo[back] = 180;
 }
 void backServoDown(){//this moves the back servo to the down position
-	servo[back] = backDown;
-	servo[back2] = backUp;
+	servo[back] = 60;
+	servo[back2] = 180;
+	wait1Msec(1000);
 }
 void resetEncoders(){//clears all encoders
 	nMotorEncoder[leftWheel1] = 0;
@@ -124,12 +125,12 @@ void turnRight(int rotations, int power){
 void initializeRobot()
 {
 	backServoUp();
-	servo[drop] = 140;
+	servo[drop] = 100;
 	return;
 }
 void intakeDown(){
 	motor[Infeed] = 100;
-	forward(200, 20);
+	wait1Msec(200);
 	motor[Infeed] = 0;
 }
 
@@ -146,46 +147,18 @@ void intakeDown(){
 task main()
 {
 //waitForStart();
-	wait1Msec(50);
-	backwards(7300, 20);
-	turnRight(250, 20);
-	backwards(400, 20);
+	initializeRobot();
+	intakeDown();
+	motor[Pulley] = 100;
+	wait1Msec(1000);
+	motor[Pulley] = 0;
+	backwards(7300, 15);
+	turnRight(700, 20);
+	backwards(600, 10);
 	backServoDown();
-	turnRight(4200, 35);
-	PlaySound(soundBeepBeep);
-	wait1Msec(50);
-
-	while(nMotorEncoder[Pulley] < 15000){
-		motor[Pulley] = 80;
-	}
-	motor[Pulley] = 0;
-
-	forward(250, 35);
-	servo[drop] = 110;
-	wait1Msec(500);
-	PlaySound(soundBeepBeep);
-	backwards(250, 35);
-	turnRight(180, 35);
-	forward(500, 35);
-
-	while(nMotorEncoder[Pulley] < 30000){
-		motor[Pulley] = 75;
-	}
-	motor[Pulley] = 0;
-	wait1Msec(500);
-	servo[drop] = 65;
-	PlaySound(soundBeepBeep);
-	wait1Msec(50);
-	backwards(7500, 35);
-	turnRight(220, 35);
-	backwards(200, 35);
-	PlaySound(soundBeepBeep);
-	wait1Msec(500);
-	backServoUp();
-	forward(500, 35);
-	while(nMotorEncoder[Pulley] > 1000){
-		motor[Pulley] = -20;
-	}
-	PlaySound(soundBeepBeep);
-	wait1Msec(500);
+	turnRight(4200, 20);
+	backwards(8700,20);
+	turnRight(2000,20);
+	//backServoUp();
+	wait1Msec(1000);
 }
