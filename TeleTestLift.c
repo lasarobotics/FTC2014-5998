@@ -80,7 +80,6 @@ task main()
 			modifier = 4;
 		}
 
-
 		if(joy2Btn(5))
 		{
 			motor[Pulley] = 75;
