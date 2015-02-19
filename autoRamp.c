@@ -146,7 +146,7 @@ void intakeDown(){
 //Start of Auto
 task main()
 {
-//waitForStart();
+	waitForStart();
 	initializeRobot();
 	intakeDown();
 	motor[Pulley] = 100;
@@ -158,7 +158,6 @@ task main()
 	backServoDown();
 	turnRight(4200, 20);
 	backwards(8700,20);
-	turnRight(2000,20);
-	//backServoUp();
+	turnRight(1700,20);
 	wait1Msec(1000);
 }
